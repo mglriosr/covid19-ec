@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-import CovidEcMap from '../components/covidEcMap/CovidEcMap' 
+import Map from '../components/covidEcMap/CovidEcMap' 
 
 class Inicio extends Component {
   render(){
-    return <CovidEcMap></CovidEcMap>
+    return <Map/>
   }
 }
 
