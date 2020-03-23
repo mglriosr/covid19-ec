@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 
 const mapStyles = {
   width: '100%',
-  height: '100%'
+  height: '100%',
 };
 
 export class MapContainer extends Component {
@@ -34,11 +34,13 @@ export class MapContainer extends Component {
       >
         <Marker onClick={this.onMarkerClick} name={'Current location'} />
 
+        <InfoWindow></InfoWindow>
+
       </Map>
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBdjQ59A20hrVp9obadrIw2IpeSx1V2Woo'
+  apiKey: 'AIzaSyBXRGdzHI4vx-HDA8tukA2SscbZjuuzg-4'
 })(MapContainer);
