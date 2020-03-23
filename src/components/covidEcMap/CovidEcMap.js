@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { GoogleMap, Marker, withGoogleMap, withScriptjs } from "react-google-maps"
 
-// const { MarkerWithLabel } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
-
-
 import MapTheme from './theme'
 
 const MyMapComponent = withScriptjs(
@@ -16,22 +13,22 @@ const MyMapComponent = withScriptjs(
       <Marker
           key={'i'}
           position={{ lat:  -2.1524996, lng: -80.050141}}
-          onClick={() => props.handleToggleOpen()} // marker ID is the key here. 
+          onClick={() => props.handleToggleOpen()} 
       ></Marker>
       <Marker
           key={'i'}
           position={{ lat:  -0.1865938, lng: -78.5706235}}
-          // onClick={() => this.handleToggleOpen(i)} // marker ID is the key here. 
+          onClick={() => props.handleToggleOpen()}
       ></Marker>
       <Marker
           key={'ii'}
           position={{ lat:  -1.2571434, lng: -78.6566383}}
-          // onClick={() => this.handleToggleOpen(i)} // marker ID is the key here. 
+          onClick={() => props.handleToggleOpen()}
       ></Marker>
       <Marker
           key={'iii'}
           position={{ lat:  -2.8922687, lng: -79.0243995}}
-          // onClick={() => this.handleToggleOpen(i)} // marker ID is the key here. 
+          onClick={() => props.handleToggleOpen()}
       ></Marker>
     </GoogleMap>
     
