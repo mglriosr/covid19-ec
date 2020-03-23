@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+
+    <style>
+      body{
+        margin: 0;
+      }
+      .map{
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+
+    <title>Map</title>
+  </head>
+  <body>
+
+    <div id="map" class="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdjQ59A20hrVp9obadrIw2IpeSx1V2Woo"></script>
+    <script type="module">
+
+      const mapTheme = [
+        {
+            "featureType": "all",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "saturation": 36
+                },
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 40
+                }
+            ]
+        },
+        {
+            "featureType": "all",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+                {
+                    "visibility": "on"
+                },
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 16
+                }
+            ]
+        },
+        {
+            "featureType": "all",
+            "elementType": "labels.icon",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 20
+                }
+            ]
+        },
+        {
+            "featureType": "administrative",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 17
+                },
+                {
+                    "weight": 1.2
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.country",
+            "elementType": "labels",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.province",
+            "elementType": "labels",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "landscape",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 20
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 21
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 17
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 29
+                },
+                {
+                    "weight": 0.2
+                }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 18
+                }
+            ]
+        },
+        {
+            "featureType": "road.local",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 16
+                }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 19
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 17
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        }
+      ]
+
+      const $map = document.querySelector('#map')
+      const map = new window.google.maps.Map(
+        $map, {
+          center: {
+            lat: 0,
+            lng: 0
+          },
+          zoom: 3,
+          styles: mapTheme
+        }
+      )
+
+      renderData()
+      
+      async function getData() {
+        const response = await fetch('https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/latest')
+        const data =  await response.json()
+        return data
+      }
+
+      const popup = new window.google.maps.InfoWindow()
+
+      function renderExtraData({confirmed, deaths, recovered, provincestate, countryregion}) {
+        return `
+          <div>
+            <p><strong> ${provincestate} - ${countryregion}</strong></p>
+            <p> <strong> Confirmados: </strong>${confirmed}</p>
+            <p> <strong> Fallecidos: </strong>${deaths}</p>
+            <p> <strong> Recuperados: </strong>${recovered}</p>
+          </div>
+        `
+      }
+
+      async function renderData() {
+        const data = await getData()
+        console.log(data)
+        data.forEach(item => {
+          if ( item.confirmed > 0 ){
+            const marker = new window.google.maps.Marker({
+              position: {
+                lat: item.location.lat,
+                lng: item.location.lng
+              },
+              map, 
+            })
+            marker.addListener('click', () => {
+              popup.setContent( renderExtraData(item) )
+              popup.open(map, marker)
+            })
+          }
+          
+        })
+      }
+
+      </script>
+  </body>
+</html>

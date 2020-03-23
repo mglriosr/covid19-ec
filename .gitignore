@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # Constants
-/constants/constants.js
+/Users/miguelrios/Development/DevBox/covid19-ec/src/keys/gmaps.js
