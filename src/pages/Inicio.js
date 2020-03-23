@@ -4,7 +4,7 @@ import CovidEcMap from '../components/covidEcMap/CovidEcMap'
 
 class Inicio extends Component {
   render(){
-    return <CovidEcMap></CovidEcMap>
+    return <p>Map in loading...</p>
   }
 }
 
