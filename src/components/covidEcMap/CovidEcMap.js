@@ -3,7 +3,7 @@ import { GoogleMap, Marker, withGoogleMap, withScriptjs } from "react-google-map
 
 import MapTheme from './theme'
 
-const MyMapComponent = withScriptjs(
+const MapBuild = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
       defaultZoom={7}
@@ -42,12 +42,12 @@ class Map extends Component {
   }
 
   render(){
-    return <MyMapComponent
+    return <MapBuild
       handleToggleOpen = {this.handleToggleOpen}
       googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXRGdzHI4vx-HDA8tukA2SscbZjuuzg-4"
-      loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `100vh` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
+      loadingElement={<div style={{ width: `100%`, height: `100%` }} />}
+      containerElement={<div style={{ width: `100%`, height: `100vh` }} />}
+      mapElement={<div style={{ width: `100%`, height: `100%` }} />}
     />
   }
 }
