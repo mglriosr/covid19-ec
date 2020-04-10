@@ -5,6 +5,7 @@ import { Button } from 'react-bulma-components';
 import Map from '../components/covidEcMap/CovidEcMap' 
 import Title from '../components/Title';
 import SideMenu from '../components/SideMenu';
+import ControlPanel from '../components/ControlPanel';
 import Footer from '../components/Footer';
 
 class Inicio extends Component {
@@ -24,12 +25,9 @@ class Inicio extends Component {
             <Map></Map>
           </div>
           <div className="column is-2">
-             <div style = {{margin: `0 0 0 -24px`}}>
-              <Title></Title>
-              <div style = {{margin: `20px 0 0 0`}}>
-                <SideMenu></SideMenu>
-              </div>
-             </div>
+            <div style = {{margin: `20px 0 0 -24px`}}>
+              <ControlPanel></ControlPanel>
+            </div>
           </div>
         </div>
         <div style = {{margin: `-24px 0 0 0`}}>

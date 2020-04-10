@@ -4,21 +4,12 @@ const SideMenu = () => {
   return (
     <aside className = "menu container is-fluid">
       <p className = "menu-label">
-        Administration
+        C I F R A S
       </p>
       <ul className = "menu-list">
-        <li><a>Team Settings</a></li>
-        <li>
-          <a className = "is-active">Manage Your Team</a>
-          <ul>
-            <li><a>Members</a></li>
-            <li><a>Plugins</a></li>
-            <li><a>Add a member</a></li>
-          </ul>
-        </li>
-        <li><a>Invitations</a></li>
-        <li><a>Cloud Storage Environment Settings</a></li>
-        <li><a>Authentication</a></li>
+        <li><a><b>1,211</b> Casos confirmados</a></li>
+        <li><a><b>3</b> Personas recuperadas</a></li>
+        <li><a><b>29</b> Fallecidos</a></li>
       </ul>
     </aside>
   )
